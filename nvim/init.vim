@@ -1,0 +1,1 @@
+source ~/bmo/init.vim
