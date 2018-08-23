@@ -179,7 +179,7 @@ set number
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme molokai
+ " colorscheme molokai
 endif
 
 set mousemodel=popup
@@ -233,7 +233,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'bubblegum'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -262,10 +262,12 @@ let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
+let g:NERDTreeWinSize = 35
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
@@ -457,6 +459,8 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
+set fillchars+=vert:│
+hi VertSplit ctermbg=NONE guibg=NONE
 
 " html
 " for html files, 2 spaces
@@ -528,9 +532,9 @@ endif
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
+  let g:airline_left_sep          = ''
   let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
+  let g:airline_right_sep         = ''
   let g:airline_right_alt_sep     = '«'
   let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
   let g:airline#extensions#readonly#symbol   = '⊘'
@@ -543,15 +547,35 @@ if !exists('g:airline_powerline_fonts')
   let g:airline_symbols.paste     = '∥'
   let g:airline_symbols.whitespace = 'Ξ'
 else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#left_sep = '|'
+  let g:airline#extensions#tabline#left_alt_sep = '|'
 
   " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
+  let g:airline_left_sep = '|'
+  let g:airline_left_alt_sep = '|'
+  let g:airline_right_sep = '|'
+  let g:airline_right_alt_sep = '|'
+  let g:airline_symbols.branch = 'b'
+  let g:airline_symbols.readonly = 'r'
+  let g:airline_symbols.linenr = '-'
 endif
+
+""" FocusMode
+function ToggleFocusMode()
+  if (&foldcolumn != 12)
+    set laststatus=0
+    set numberwidth=10
+    set foldcolumn=12
+    set noruler
+    hi FoldColumn ctermbg=none
+    hi LineNr ctermfg=0 ctermbg=none
+    hi NonText ctermfg=0
+  else
+    set laststatus=2
+    set numberwidth=4
+    set foldcolumn=0
+    set ruler
+    execute 'colorscheme ' . g:colors_name
+  endif
+endfunction
+nnoremap <F1> :call ToggleFocusMode()<cr>
