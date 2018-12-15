@@ -1,13 +1,22 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # Path to your oh-my-zsh installation.
   export ZSH=/home/guinhoshuto/.oh-my-zsh
+  export TERMINAL=rxvt-256colors
+  export ANDROID_HOME=~/Android/Sdk
 
+  export TTC_SAY_BOX='/home/guinhoshuto/dotfiles/bmo.ansi'
+  export TTC_WEATHER=Brazil
+  export TTC_CELSIUS=true
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="miloshadzic"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
